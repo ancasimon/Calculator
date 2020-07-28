@@ -12,8 +12,11 @@ namespace Calculator
             var userNumberList = Console.ReadLine();
             Console.WriteLine("Please enter 1 if you would like to multiply them or 2 if you would like to square them.");
             var userOption = Console.Read();
+
             int[] squareNumList = Array.ConvertAll(userNumberList.Split(','), int.Parse);
+            //note about the line above: When working on Part2 of this exercise, it seemed that the easiest thing to do was create a copy of the initial array entered by the user and then replace the individual items in the array with their squared value. Since I didn't know what the exact length of the array might be!!! (the user could enter any number of numbers).
             //Console.WriteLine($"Initial squareNumList: { squareNumList }");
+
             if (userOption == '1')
             {
                 var intArray = Array.ConvertAll(userNumberList.Split(','), int.Parse);
@@ -25,6 +28,7 @@ namespace Calculator
                     //Console.WriteLine($"i: { intArray[i]}");
                 }
                 Console.WriteLine($"And the total result of multiplying these values together is: {multipliedTotal}");
+
             } else if (userOption == '2')
             {
                 var intArray = Array.ConvertAll(userNumberList.Split(','), int.Parse);
@@ -38,7 +42,8 @@ namespace Calculator
                     //Console.WriteLine($"Individual square number: { squareNum }");
                 }
                 Console.WriteLine("Final list of your numbers squared:" + string.Join(',', squareNumList));
-
+                //NOTE about the string.Join method above: to prevent the output of this array being System.Int32[] - which it was!! because apparently when you print an array of integers, the ToString() method is applied and the type of the array gets printed -- you have to do the following:
+                //Instead of the type of the array, I want to print the value and the string.Join method helps me concatenate all those integers (using the specified separator) so that I can print them!
             }
             
         }

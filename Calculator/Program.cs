@@ -8,16 +8,28 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Please enter a comma-separated list of numbers!");
-            var userNumberList = Console.ReadLine();
-            Console.WriteLine("Please enter 1 if you would like to multiply them or 2 if you would like to square them.");
-            var userOption = Console.Read();
+            //Initial version below:
+            //Console.WriteLine("Please enter a comma-separated list of numbers!");
+            //var userNumberList = Console.ReadLine();
+            //Console.WriteLine("Please enter 1 if you would like to multiply them or 2 if you would like to square them.");
+            //var userOption = Console.Read();
+            //Version with shorthand below:
+
+            Console.WriteLine("Please enter * if you would like to do multiplication or ^2 if you would like to square the numbers, followed by a space(! Don't forget the space!), and then specify a comma-separated list of numbers.");
+            
+            //Logic below: Grab the whole input from the user and then separate it into the math operation requested ("* " or "^2") and the string of numbers:
+            var input = Console.ReadLine();
+            var userNumberList = input.Substring(2);
+            var userOption = input.Substring(0, 2);
+            Console.WriteLine($"full input is: {input}");
+            Console.WriteLine($"substring is: {userNumberList}");
+            Console.WriteLine($"selected option is: {userOption}");
 
             int[] squareNumList = Array.ConvertAll(userNumberList.Split(','), int.Parse);
             //note about the line above: When working on Part2 of this exercise, it seemed that the easiest thing to do was create a copy of the initial array entered by the user and then replace the individual items in the array with their squared value. Since I didn't know what the exact length of the array might be!!! (the user could enter any number of numbers).
             //Console.WriteLine($"Initial squareNumList: { squareNumList }");
 
-            if (userOption == '1')
+            if (userOption == "* ")
             {
                 var intArray = Array.ConvertAll(userNumberList.Split(','), int.Parse);
                 //Console.WriteLine($"intArray: {intArray}");
@@ -29,7 +41,7 @@ namespace Calculator
                 }
                 Console.WriteLine($"And the total result of multiplying these values together is: {multipliedTotal}");
 
-            } else if (userOption == '2')
+            } else if (userOption == "^2")
             {
                 var intArray = Array.ConvertAll(userNumberList.Split(','), int.Parse);
                 //Console.WriteLine($"intArray: {intArray}");

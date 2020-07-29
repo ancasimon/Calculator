@@ -21,6 +21,7 @@ namespace Calculator
                 ^2 if you would like to square the numbers,
                 + to add them up,
                 / to divide them,
+                av to find the average of their sum,
         And then specify a comma-separated list of numbers.");
             
             //Logic below: Grab the whole input from the user and then separate it into the math operation requested ("* " or "^2") and the string of numbers:
@@ -47,7 +48,8 @@ namespace Calculator
                 }
                 Console.WriteLine($"And the total result of multiplying these values together is: {multipliedTotal}.");
 
-            } else if (userOption == "^2")
+            } 
+            else if (userOption == "^2")
             {
                 var intArray = Array.ConvertAll(userNumberList.Split(','), int.Parse);
                 //Console.WriteLine($"intArray: {intArray}");
@@ -62,7 +64,8 @@ namespace Calculator
                 Console.WriteLine("Final list of your numbers squared:" + string.Join(',', squareNumList));
                 //NOTE about the string.Join method above: to prevent the output of this array being System.Int32[] - which it was!! because apparently when you print an array of integers, the ToString() method is applied and the type of the array gets printed -- you have to do the following:
                 //Instead of the type of the array, I want to print the value and the string.Join method helps me concatenate all those integers (using the specified separator) so that I can print them!
-            } else if (userOption == "+ ")
+            } 
+            else if (userOption == "+ ")
             {
                 var intArray = Array.ConvertAll(userNumberList.Split(','), int.Parse);
                 int sum = 0;
@@ -72,8 +75,10 @@ namespace Calculator
                 }
                 Console.WriteLine($"And the total sum of these values is: {sum}.");
 
-            } else if (userOption == "/ ")
+            } 
+            else if (userOption == "/ ")
             {
+                //Note this divides each integer by the next - not the result by the next - that may be coming in the future at a theater near you!
                 var intArray = Array.ConvertAll(userNumberList.Split(','), int.Parse);
                 int result = 0;
                 //Find the index of the last item in the array - and as long as the item we are on during the loop isn't that last one, then do the division; otherwise, just return the result:
@@ -87,6 +92,19 @@ namespace Calculator
                     }
                 }
                 Console.WriteLine($"And the result after dividing the first value by the subsequent one is: {result}");
+            }
+            else if (userOption == "av")
+            {
+                var intArray = Array.ConvertAll(userNumberList.Split(','), int.Parse);
+                int average = 0;
+                int sum = 0;
+               
+                for (int i = 0; i < intArray.Length; i++)
+                {
+                    sum = intArray[i] + sum;
+                    average = sum / (i+1);
+                }
+                Console.WriteLine($"And the average of the sum of these values is: {average}");
 
 
             }
